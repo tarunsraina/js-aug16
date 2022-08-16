@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch demo</title>
+</head>
+<body>
+
+    <center>
+        <h1>Fetch demo</h1>
+    </center>
+
+    <p id="hiMsg"></p>
+    <button id="sayhi">Say Hi!</button>
+    <br>
+    <br>
+
+    <button id="json-users">Get users from json file</button>
+    <br>
+    <h3 id="display-users"></h3>
+    <br>
+    
+
+    <button id="get-posts">Get posts from API</button>
+
+    <center>
+        <h1 id="post-title"></h1>
+    </center>
+
+    <p id="displayPosts"></p>
+
+
+    <script>
+        document.getElementById('sayhi').addEventListener('click',getHiMessage);
+        document.getElementById('json-users').addEventListener('click',getJsonUsers);
+        document.getElementById('get-posts').addEventListener('click',getPosts);
+        function getHiMessage(){
+            fetch('hi.txt')
+            .then((res)=>res.text())
+            .then((data)=>document.getElementById('hiMsg').innerHTML = data)
+            
+        }
+
+        function getJsonUsers(){
+            fetch('users.json')
+            .then((res)=>res.json())
+            .then((data)=>{
+                let output = `<h2> Users </h2>`
+                data.forEach((user)=>{
+                    output += `
+                    <ul>
+                        <li> ID : ${user.id} </li>
+                        <li> Name : ${user.name} </li>
+                        <li> Admin : ${user.admin} </li>
+                    </ul>`;
+                })
+                document.getElementById("display-users").innerHTML = output;
+            }
+            )
+            
+        }
+
+        function getPosts(){
+
+            document.getElementById("post-title").innerHTML = "POSTS:"
+            fetch('https://jsonplaceholder.typicode.com/posts')
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data)
+                let output = ``
+                data.forEach((user)=>{
+                    output += `
+                    <ul>
+                        
+                        <h1> ${user.title} </h1>
+                        <h2> ${user.body} </h2>
+                    </ul>`;
+                })
+                document.getElementById("displayPosts").innerHTML = output;
+            }
+            )
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,17 @@
+[
+    {
+        "id" : 100,
+        "name" : "Tarun",
+        "admin":"yes"
+    },
+    {
+        "id" : 101,
+        "name" : "hrithik",
+        "admin":"no"
+    },
+    { 
+        "id" : 102,
+        "name" : "sumanth",
+        "admin":"yes"
+    }
+]
